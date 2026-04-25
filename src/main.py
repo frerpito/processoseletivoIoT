@@ -106,7 +106,7 @@ calibrar_sensor()
 # LOOP PRINCIPAL
 # ========================
 
-while True:
+for i in range(2):
     try:
         # Leitura sensores
         dht_sensor.measure()
@@ -164,3 +164,4 @@ while True:
         print("Erro na leitura:", e)
 
     time.sleep(2)
+print("Teste")
