@@ -1,7 +1,115 @@
 {
   "version": 1,
-  "author": "Uri Shaked",
+  "author": "Francisco Guilherme Cesário Alcântara",
   "editor": "wokwi",
-  "parts": [ { "type": "board-esp32-devkit-c-v4", "id": "esp", "top": 0, "left": 0, "attrs": {} } ],
-  "connections": [ [ "esp:TX", "$serialMonitor:RX", "", [] ], [ "esp:RX", "$serialMonitor:TX", "", [] ] ]
+  "parts": [
+    { "type": "wokwi-breadboard-half", "id": "bb1", "top": 16.2, "left": -352.4, "attrs": {} },
+    {
+      "type": "board-esp32-devkit-c-v4",
+      "id": "esp",
+      "top": 0,
+      "left": 24.04,
+      "attrs": { "env": "micropython-20231227-v1.22.0" }
+    },
+    {
+      "type": "wokwi-dht22",
+      "id": "dht1",
+      "top": -191.7,
+      "left": -101.4,
+      "attrs": { "temperature": "29.5", "humidity": "86" }
+    },
+    {
+      "type": "wokwi-gas-sensor",
+      "id": "gas1",
+      "top": -176.8,
+      "left": -256.3,
+      "rotate": 90,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led1",
+      "top": -51.6,
+      "left": -466.6,
+      "attrs": { "color": "limegreen" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led2",
+      "top": -51.6,
+      "left": -581.8,
+      "attrs": { "color": "red" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led3",
+      "top": -51.6,
+      "left": -524.2,
+      "attrs": { "color": "yellow" }
+    },
+    {
+      "type": "wokwi-buzzer",
+      "id": "bz1",
+      "top": -160.8,
+      "left": -286.2,
+      "attrs": { "volume": "0.1" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r1",
+      "top": 118.6,
+      "left": -356.05,
+      "rotate": 270,
+      "attrs": { "value": "220" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r2",
+      "top": 118.6,
+      "left": -317.65,
+      "rotate": 270,
+      "attrs": { "value": "220" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r3",
+      "top": 118.6,
+      "left": -336.85,
+      "rotate": 270,
+      "attrs": { "value": "220" }
+    },
+    { "type": "wokwi-74hc595", "id": "sr1", "top": -183.6, "left": -618.56, "attrs": {} }
+  ],
+  "connections": [
+    [ "esp:TX", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX", "$serialMonitor:TX", "", [] ],
+    [ "bb1:tp.25", "esp:3V3", "green", [ "v0" ] ],
+    [ "esp:GND.1", "bb1:tn.25", "black", [ "h-28.65", "v-115.2" ] ],
+    [ "dht1:VCC", "bb1:tp.21", "red", [ "v0" ] ],
+    [ "dht1:GND", "bb1:tn.24", "black", [ "v0" ] ],
+    [ "esp:23", "dht1:SDA", "cyan", [ "h57.6", "v-96", "h-259.3" ] ],
+    [ "gas1:VCC", "bb1:tp.11", "red", [ "v0" ] ],
+    [ "gas1:GND", "bb1:tn.12", "black", [ "v0" ] ],
+    [ "esp:34", "bb1:17t.a", "orange", [ "h0" ] ],
+    [ "bb1:17t.a", "gas1:AOUT", "orange", [ "v0" ] ],
+    [ "bz1:1", "bb1:tn.6", "black", [ "v0" ] ],
+    [ "bz1:2", "esp:21", "magenta", [ "v48", "h402.8", "v9.6" ] ],
+    [ "esp:GND.1", "bb1:bn.25", "black", [ "h-28.65", "v67.2", "v-9.6", "h-49.6" ] ],
+    [ "led1:A", "bb1:5t.a", "limegreen", [ "v0" ] ],
+    [ "bb1:3t.b", "led3:A", "yellow", [ "v0", "h-192" ] ],
+    [ "bb1:1t.c", "led2:A", "red", [ "h-230.4" ] ],
+    [ "led1:C", "bb1:tn.3", "black", [ "v9.6", "h154" ] ],
+    [ "led3:C", "bb1:tn.2", "black", [ "v19.2", "h202" ] ],
+    [ "bb1:tn.1", "led2:C", "black", [ "v-19.3", "h-248" ] ],
+    [ "esp:2", "bb1:5b.j", "limegreen", [ "h28.8", "v96", "h-441.6", "v-9.6" ] ],
+    [ "bb1:3b.j", "esp:18", "yellow", [ "v105.6", "h489.6", "v-172.8" ] ],
+    [ "bb1:1b.j", "esp:19", "red", [ "v124.8", "h537.6", "v-201.6" ] ],
+    [ "r1:1", "bb1:1b.h", "", [ "$bb" ] ],
+    [ "r1:2", "bb1:1t.d", "", [ "$bb" ] ],
+    [ "r2:1", "bb1:5b.h", "", [ "$bb" ] ],
+    [ "r2:2", "bb1:5t.d", "", [ "$bb" ] ],
+    [ "r3:1", "bb1:3b.h", "", [ "$bb" ] ],
+    [ "r3:2", "bb1:3t.d", "", [ "$bb" ] ]
+  ],
+  "dependencies": {}
 }
