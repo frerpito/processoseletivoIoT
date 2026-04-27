@@ -244,71 +244,109 @@ Preencha todas as seções abaixo de forma **clara, objetiva e técnica**.
 
 ### 👤 Identificação do Candidato
 
-- **Nome completo:**  
-- **GitHub:**  
+- **Nome completo: Francisco Guilherme Cesário Alcântara**  
+- **GitHub: https://github.com/frerpito/processoseletivoIoT**  
 
 ---
 
 ## 1️⃣ Visão Geral da Solução
 
-Descreva, em poucas palavras:
+O projeto consiste em um sistema embarcado para monitoramento de ambientes internos, capaz de analisar temperatura, umidade e concentração de gás, classificando o ambiente em diferentes níveis de criticidade.
 
-- Qual é o objetivo do seu projeto  
-- O que o sistema embarcado simulado faz  
-- Como o usuário interage com ele (se aplicável)
+O sistema simulado realiza:
+
+leitura contínua de sensores ambientais
+processamento dos dados coletados
+classificação em três estados: OK, MODERADO e CRÍTICO
+acionamento de atuadores (LEDs e buzzer) conforme o estado
+
+A interação ocorre de forma automática, com saída de informações via monitor serial e sinalização visual/sonora.
 
 ---
 
 ## 2️⃣ Arquitetura do Sistema Embarcado
+O sistema segue uma arquitetura simples baseada em loop principal com etapas bem definidas:
 
-Explique a arquitetura lógica do seu projeto, abordando:
+🔹 Fluxo principal:
+Calibração inicial do sensor de gás (baseline)
+Loop de execução:
+- leitura dos sensores
+- avaliação individual dos parâmetros
+- decisão do estado global
+- acionamento dos atuadores
+- exibição dos dados no terminal
 
-- Fluxo principal do programa (`main.py`)  
-- Estrutura de estados, loops ou temporizações  
-- Como os componentes interagem entre si  
+🔹 Estrutura lógica:
+Funções separadas para avaliação de cada variável (temperatura, umidade, gás)
+Uso de thresholds definidos por constantes
+Loop controlado (execução limitada para compatibilidade com CI/simulação)
 
-Se desejar, utilize tópicos ou um pequeno diagrama em texto.
+🔹 Interação entre componentes:
+Sensores fornecem dados brutos
+Funções processam e classificam os dados
+Lógica central define o estado final
+Atuadores respondem ao estado calculado
 
 ---
 
 ## 3️⃣ Componentes Utilizados na Simulação
 
-Liste os principais componentes definidos no `diagram.json`, por exemplo:
-
-- Tipo de placa utilizada  
-- LEDs, botões, sensores, atuadores, etc.  
-- Função de cada componente no sistema  
+- Placa microcontroladora (ESP32): Responsável pelo processamento e controle do sistema
+- Sensor DHT22: Mede temperatura e umidade do ambiente
+- Sensor de gás MQ-2 (via ADC): Detecta presença de gases, utilizando calibração por baseline
+- LEDs (verde, amarelo e vermelho): Indicam o estado do sistema
+- Buzzer: Ativado em estado crítico como alerta sonoro
 
 ---
 
 ## 4️⃣ Decisões Técnicas Relevantes
 
-Explique brevemente decisões importantes tomadas durante o desenvolvimento, como:
-
-- Organização do código  
-- Uso de funções, estados ou constantes  
-- Estratégias para temporização ou controle lógico  
+- Modularização do código: Uso de funções para separar responsabilidades (leitura, avaliação e atuação)
+- Uso de baseline para o sensor de gás: Permite maior robustez ao considerar variações do ambiente
+- Definição de thresholds como constantes: Facilita ajustes e manutenção do sistema
+- Estratégia de decisão por prioridade: Estado CRÍTICO tem precedência sobre MODERADO e OK
+- Controle do loop com iterações limitadas: Evita timeout em ambiente de simulação/CI
 
 ---
 
 ## 5️⃣ Resultados Obtidos
 
-Descreva o comportamento final do sistema:
+O sistema apresentou comportamento consistente durante a simulação:
 
-- O que funciona corretamente  
-- Quais requisitos foram atendidos  
-- Resultado observado na simulação do Wokwi  
+Leitura correta dos sensores
+Classificação adequada dos estados ambientais
+Acionamento correto dos LEDs conforme o estado
+Ativação do buzzer em situações críticas
+Exibição clara das informações no terminal
+
+Todos os requisitos propostos foram atendidos, incluindo:
+
+integração de múltiplos sensores
+processamento de dados
+resposta via atuadores
 
 ---
 
 ## 6️⃣ Comentários Adicionais (Opcional)
 
-Utilize este espaço para comentar, se desejar:
+🔹 Dificuldades encontradas
+Ajuste dos thresholds para classificação coerente
+Simulação do comportamento do sensor de gás
 
-- Dificuldades encontradas  
-- Limitações da solução  
-- Melhorias que você faria com mais tempo  
-- Principais aprendizados durante o desafio  
+🔹 Limitações
+Uso de thresholds fixos
+Simulação não representa totalmente condições reais de hardware
+
+🔹 Melhorias futuras
+Implementação de comunicação IoT (ex: MQTT)
+Uso de filtros para suavização de leituras
+Interface para monitoramento remoto
+Aplicação em ambientes outdoor para aplicação ecológica
+
+🔹 Aprendizados
+Importância da organização em sistemas embarcados
+Integração entre sensores e atuadores
+Uso de ambiente wokwi e desenvolvimento completo de projeto simulado
 
 ---
 
