@@ -299,11 +299,11 @@ Sensores → Aquisição de dados → Processamento → Classificação → Atua
 
 ## 3️⃣ Componentes Utilizados na Simulação
 
-- Placa microcontroladora (ESP32): Responsável pelo processamento e controle do sistema
-- Sensor DHT22: Mede temperatura e umidade do ambiente
-- Sensor de gás MQ-2 (via ADC): Detecta presença de gases, utilizando calibração por baseline
-- LEDs (verde, amarelo e vermelho): Indicam o estado do sistema
-- Buzzer: Ativado em estado crítico como alerta sonoro
+- **Placa microcontroladora (ESP32):** Responsável pelo processamento e controle do sistema
+- **Sensor DHT22:** Mede temperatura e umidade do ambiente
+- **Sensor de gás MQ-2 (via ADC):** Detecta presença de gases, utilizando calibração por baseline
+- **LEDs (verde, amarelo e vermelho):** Indicam o estado do sistema
+- **Buzzer:** Ativado em estado crítico como alerta sonoro
 
 ---
 
@@ -314,6 +314,7 @@ Sensores → Aquisição de dados → Processamento → Classificação → Atua
 - **Definição de thresholds como constantes:** Facilita ajustes e manutenção do sistema
 - **Estratégia de decisão por prioridade:** Estado CRÍTICO tem precedência sobre MODERADO e OK
 - **Controle do loop com iterações limitadas:** Evita timeout em ambiente de simulação/CI
+- **Mudança no nome da API Key:** A chave gerada foi salva sob o nome WOKWI_CLI_TOKEN, levemente diferente do nome sugerido 
 
 ---
 
