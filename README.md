@@ -251,41 +251,49 @@ Preencha todas as seções abaixo de forma **clara, objetiva e técnica**.
 
 ## 1️⃣ Visão Geral da Solução
 
-O projeto consiste em um sistema embarcado para monitoramento de ambientes internos, capaz de analisar temperatura, umidade e concentração de gás, classificando o ambiente em diferentes níveis de criticidade.
+O projeto consiste em um sistema embarcado para monitoramento de ambientes internos, capaz de analisar temperatura, umidade e concentração de gases, classificando o ambiente em diferentes níveis de criticidade.
 
 O sistema simulado realiza:
 
-leitura contínua de sensores ambientais
-processamento dos dados coletados
-classificação em três estados: OK, MODERADO e CRÍTICO
-acionamento de atuadores (LEDs e buzzer) conforme o estado
+- Leitura contínua de sensores ambientais
+- Processamento dos dados coletados
+- Classificação em três estados: OK, MODERADO e CRÍTICO
+- Acionamento de atuadores (LEDs e buzzer) conforme o estado
 
 A interação ocorre de forma automática, com saída de informações via monitor serial e sinalização visual/sonora.
 
 ---
 
 ## 2️⃣ Arquitetura do Sistema Embarcado
-O sistema segue uma arquitetura simples baseada em loop principal com etapas bem definidas:
+O sistema segue uma arquitetura simples baseada em um loop principal estruturado em etapas bem definidas:
 
-🔹 Fluxo principal:
-Calibração inicial do sensor de gás (baseline)
-Loop de execução:
-- leitura dos sensores
-- avaliação individual dos parâmetros
-- decisão do estado global
-- acionamento dos atuadores
-- exibição dos dados no terminal
+### 🔹 Fluxo principal
 
-🔹 Estrutura lógica:
-Funções separadas para avaliação de cada variável (temperatura, umidade, gás)
-Uso de thresholds definidos por constantes
-Loop controlado (execução limitada para compatibilidade com CI/simulação)
+- Calibração inicial do sensor de gás (baseline)
+- Loop de execução:
+  - Leitura dos sensores
+  - Avaliação individual dos parâmetros
+  - Decisão do estado global
+  - Acionamento dos atuadores
+  - Exibição dos dados no terminal
 
-🔹 Interação entre componentes:
-Sensores fornecem dados brutos
-Funções processam e classificam os dados
-Lógica central define o estado final
-Atuadores respondem ao estado calculado
+### 🔹 Estrutura lógica
+
+- Funções separadas para avaliação de cada variável (temperatura, umidade, gás)
+- Uso de thresholds definidos por constantes
+- Loop controlado (execução limitada para compatibilidade com CI/simulação)
+
+### 🔹 Interação entre componentes
+
+- Sensores fornecem dados brutos
+- Funções processam e classificam os dados
+- Lógica central define o estado final
+- Atuadores respondem ao estado calculado
+
+
+**Fluxo simplificado:**
+
+Sensores → Aquisição de dados → Processamento → Classificação → Atuadores
 
 ---
 
@@ -302,7 +310,7 @@ Atuadores respondem ao estado calculado
 ## 4️⃣ Decisões Técnicas Relevantes
 
 - **Modularização do código:** Uso de funções para separar responsabilidades (leitura, avaliação e atuação)
-- **Calibração do sensor MQ-2 (baseline):** Utilizado para considerar variações do ambiente e adaptar a solução para correta classificação no ambiente WOKWI.
+- **Calibração do sensor MQ-2 (baseline):** Permite considerar variações do ambiente e adaptar a leitura ao contexto da simulação no Wokwi
 - **Definição de thresholds como constantes:** Facilita ajustes e manutenção do sistema
 - **Estratégia de decisão por prioridade:** Estado CRÍTICO tem precedência sobre MODERADO e OK
 - **Controle do loop com iterações limitadas:** Evita timeout em ambiente de simulação/CI
@@ -321,32 +329,36 @@ O sistema apresentou comportamento consistente durante a simulação:
 
 Todos os requisitos propostos foram atendidos, incluindo:
 
-- integração de múltiplos sensores
-- processamento de dados
-- resposta via atuadores
+- Integração de múltiplos sensores
+- Processamento de dados
+- Resposta via atuadores
 
 ---
 
 ## 6️⃣ Comentários Adicionais (Opcional)
 
-🔹 Dificuldades encontradas
-Ajuste dos thresholds para classificação coerente
-Compreensão do comportamento do sensor de gás em ambiente simulado
+### 🔹 Dificuldades encontradas
 
-🔹 Limitações
-Uso de thresholds fixos
-Simulação não representa totalmente condições reais de hardware
+- Ajuste dos thresholds para classificação coerente
+- Compreensão do comportamento do sensor de gás em ambiente simulado
 
-🔹 Melhorias futuras
-Implementação de comunicação IoT (ex: MQTT)
-Uso de filtros para suavização de leituras
-Interface para monitoramento remoto
-Aplicação em ambientes outdoor para aplicação ecológica
+### 🔹 Limitações
 
-🔹 Aprendizados
-Importância da organização em sistemas embarcados
-Integração entre sensores e atuadores
-Uso de ambiente wokwi e desenvolvimento completo de projeto simulado
+- Uso de thresholds fixos
+- A simulação não representa completamente as condições reais de hardware
+
+### 🔹 Melhorias futuras
+
+- Implementação de comunicação IoT (ex: MQTT)
+- Uso de filtros para suavização de leituras
+- Interface para monitoramento remoto
+- Aplicação em contextos ambientais/ecológicos
+
+### 🔹 Aprendizados
+
+- Importância da organização em sistemas embarcados
+- Integração entre sensores e atuadores
+- Uso do ambiente Wokwi e desenvolvimento completo de projeto simulado
 
 ---
 
