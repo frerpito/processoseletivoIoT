@@ -301,11 +301,11 @@ Atuadores respondem ao estado calculado
 
 ## 4️⃣ Decisões Técnicas Relevantes
 
-- Modularização do código: Uso de funções para separar responsabilidades (leitura, avaliação e atuação)
-- Uso de baseline para o sensor de gás: Permite maior robustez ao considerar variações do ambiente
-- Definição de thresholds como constantes: Facilita ajustes e manutenção do sistema
-- Estratégia de decisão por prioridade: Estado CRÍTICO tem precedência sobre MODERADO e OK
-- Controle do loop com iterações limitadas: Evita timeout em ambiente de simulação/CI
+- **Modularização do código:** Uso de funções para separar responsabilidades (leitura, avaliação e atuação)
+- **Calibração do sensor MQ-2 (baseline):** Utilizado para considerar variações do ambiente e adaptar a solução para correta classificação no ambiente WOKWI.
+- **Definição de thresholds como constantes:** Facilita ajustes e manutenção do sistema
+- **Estratégia de decisão por prioridade:** Estado CRÍTICO tem precedência sobre MODERADO e OK
+- **Controle do loop com iterações limitadas:** Evita timeout em ambiente de simulação/CI
 
 ---
 
@@ -313,17 +313,17 @@ Atuadores respondem ao estado calculado
 
 O sistema apresentou comportamento consistente durante a simulação:
 
-Leitura correta dos sensores
-Classificação adequada dos estados ambientais
-Acionamento correto dos LEDs conforme o estado
-Ativação do buzzer em situações críticas
-Exibição clara das informações no terminal
+- Leitura correta dos sensores
+- Classificação adequada dos estados ambientais
+- Acionamento correto dos LEDs conforme o estado
+- Ativação do buzzer em situações críticas
+- Exibição clara das informações no terminal
 
 Todos os requisitos propostos foram atendidos, incluindo:
 
-integração de múltiplos sensores
-processamento de dados
-resposta via atuadores
+- integração de múltiplos sensores
+- processamento de dados
+- resposta via atuadores
 
 ---
 
@@ -331,7 +331,7 @@ resposta via atuadores
 
 🔹 Dificuldades encontradas
 Ajuste dos thresholds para classificação coerente
-Simulação do comportamento do sensor de gás
+Compreensão do comportamento do sensor de gás em ambiente simulado
 
 🔹 Limitações
 Uso de thresholds fixos
